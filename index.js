@@ -1,8 +1,11 @@
-const express = require('express')
-const app = express()
-app.use(express.json()) 
 //lol tengo sueño aaaaaaaaaaaaaaaaa
 //ERA 3.5 NO 3.4 FUCK 
+const express = require('express')
+const morgan = require('morgan') // importa librería 
+const app = express()
+
+app.use(express.json())
+app.use(morgan('tiny')) // se configura el tiny? 
 let persons = [
     { 
       id: 1,
