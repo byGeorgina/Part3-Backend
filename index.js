@@ -4,8 +4,14 @@ const express = require('express')
 const morgan = require('morgan') // importa librería 
 const app = express()
 
+
 app.use(express.json())
-app.use(morgan('tiny')) // se configura el tiny? 
+morgan.token('body', (req, res) => {
+  return req.method === 'POST' ? JSON.stringify(req.body) : ''
+})
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
+
+
 let persons = [
     { 
       id: 1,
