@@ -4,6 +4,10 @@ const express = require('express')
 const morgan = require('morgan') // importa librería 
 const app = express()
 
+const cors = require('cors')
+app.use(express.json())
+app.use(cors()) 
+app.use(express.static('dist'))
 
 app.use(express.json())
 morgan.token('body', (req, res) => {

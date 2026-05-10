@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Agenda de Emergencia</h2>
+  <div id="contacts"></div>
+  <script>
+    fetch('http://localhost:3001/api/persons')
+      .then(res => res.json())
+      .then(data => {
+        const div = document.getElementById('contacts')
+        div.innerHTML = data.map(p => `<p>${p.name}: ${p.number}</p>`).join('')
+      })
+  </script>
+</body>
+</html>
