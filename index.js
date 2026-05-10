@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 app.use(express.json()) 
 //lol tengo sueño aaaaaaaaaaaaaaaaa
-//ERA 3.5 NO 3.5 FUCK 
+//ERA 3.5 NO 3.4 FUCK 
 let persons = [
     { 
       id: 1,
