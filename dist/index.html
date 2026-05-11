@@ -1,15 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonebook Full Stack</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; background: #f4f4f9; }
+        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 500px; margin: auto; }
+        h2 { color: #333; border-bottom: 2px solid #646cff; padding-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { text-align: left; padding: 12px; border-bottom: 1px solid #ddd; }
+        th { background: #646cff; color: white; }
+        tr:hover { background: #f1f1f1; }
+        .status { font-size: 0.8em; color: #666; margin-top: 20px; }
+    </style>
+</head>
 <body>
-  <h2>Agenda de Emergencia</h2>
-  <div id="contacts"></div>
-  <script>
-    fetch('http://localhost:3001/api/persons')
-      .then(res => res.json())
-      .then(data => {
-        const div = document.getElementById('contacts')
-        div.innerHTML = data.map(p => `<p>${p.name}: ${p.number}</p>`).join('')
-      })
-  </script>
+    <div class="container">
+        <h2>Phonebook App</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Número</th>
+                </tr>
+            </thead>
+            <tbody id="contacts-body">
+                </tbody>
+        </table>
+        <p class="status">Conectado al Backend en: <span id="url"></span></p>
+    </div>
+
+    <script>
+        const url = window.location.origin + '/api/persons'
+        document.getElementById('url').innerText = url
+
+        fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                const body = document.getElementById('contacts-body')
+                body.innerHTML = data.map(p => `
+                    <tr>
+                        <td><strong>${p.name}</strong></td>
+                        <td>${p.number}</td>
+                    </tr>
+                `).join('')
+            })
+            .catch(err => console.error('Error cargando datos:', err))
+    </script>
 </body>
 </html>
